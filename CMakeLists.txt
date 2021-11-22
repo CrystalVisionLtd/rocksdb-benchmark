@@ -11,4 +11,4 @@ include_directories(deps/rocksdb/include)
 
 pybind11_add_module(rocksbench src/pymain.cpp)
 
-add_executable(main src/main.cpp)
+add_executable(diskbench src/main.cpp)
