@@ -1,7 +1,7 @@
 cmake_minimum_required(VERSION 3.21)
 project(RocksDBBenchmark)
 
-set(CMAKE_CXX_STANDARD 23)
+set(CMAKE_CXX_STANDARD 20)
 
 add_subdirectory(deps/pybind11)
 include_directories(deps/pybind11/include)
