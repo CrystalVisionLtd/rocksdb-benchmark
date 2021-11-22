@@ -41,7 +41,7 @@ PYBIND11_MODULE(rocksbench, m) {
       &bench_disk_performance,
       "path"_a,
       "total_bytes"_a = 1ULL << 30,
-      "uint_size"_a = 4ULL << 10);
+      "unit_size"_a = 4ULL << 10);
 
   m.def("human_readable", &human_readable, "bps"_a);
 }
