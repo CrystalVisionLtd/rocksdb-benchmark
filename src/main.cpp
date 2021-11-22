@@ -23,14 +23,15 @@ int main(int argc, char** argv) {
   }
 
   size_t total_bytes =
-      result["total"].count() > 0 ? result["total"].count() : 1ULL << 30;
+      result["total"].count() > 0 ? result["total"].as<size_t>() : 1ULL << 30;
   size_t unit_bytes =
-      result["unit"].count() > 0 ? result["unit"].count() : 4ULL << 10;
+      result["unit"].count() > 0 ? result["unit"].as<size_t>() : 4ULL << 10;
   auto ret = bench_disk_performance(
       result["path"].as<std::string>(), total_bytes, unit_bytes);
   std::cout << "Continuous read: " << human_readable(ret.read_cont_bps)
             << std::endl;
-  std::cout << "Random read: " << human_readable(ret.read_rand_bps) << std::endl;
+  std::cout << "Random read: " << human_readable(ret.read_rand_bps)
+            << std::endl;
   std::cout << "Continuous write: " << human_readable(ret.write_cont_bps)
             << std::endl;
   std::cout << "Random write: " << human_readable(ret.write_rand_bps)
