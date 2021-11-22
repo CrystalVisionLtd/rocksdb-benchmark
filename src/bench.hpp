@@ -8,6 +8,7 @@
 #include <fstream>
 #include <random>
 #include <iomanip>
+#include <algorithm>
 
 using namespace std::chrono;
 
