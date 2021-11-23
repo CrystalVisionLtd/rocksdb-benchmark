@@ -1,0 +1,1 @@
+> There are a few cases where leveled is competitive. The first is *key-order* inserts and a RocksDB optimization greatly reduces write-amp in that case. The second one is skewed writes where only a small fraction of the keys are likely to be updated.
