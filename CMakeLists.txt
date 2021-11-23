@@ -9,6 +9,7 @@ include_directories(deps/pybind11/include)
 
 add_subdirectory(deps/rocksdb)
 include_directories(deps/rocksdb/include)
+set_target_properties(rocksdb PROPERTIES POSITION_INDEPENDENT_CODE TRUE)
 
 pybind11_add_module(rocksbench src/pymain.cpp)
 target_link_libraries(rocksbench PRIVATE rocksdb)
