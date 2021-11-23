@@ -153,7 +153,7 @@ class RocksBench {
     db->Close();
     auto s = rocksdb::DestroyDB(name, opts);
     if (!s.ok()) {
-      throw std::exception(s.getState());
+      throw std::runtime_error(s.ToString());
     }
   }
   std::string GetProperty(const std::string& key) {
