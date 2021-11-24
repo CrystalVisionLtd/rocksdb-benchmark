@@ -95,10 +95,22 @@ class RocksBench {
     return end - start;
   }
 
+  duration<double> BenchDeleteRange(uint64_t begin_key, uint64_t end_key) {
+    assert(db);
+    WriteOptions wopts;
+    auto start = high_resolution_clock::now();
+    auto s = db->DeleteRange(
+        wopts, nullptr, pack_slice(begin_key), pack_slice(end_key));
+    auto end = high_resolution_clock::now();
+    assert(s.ok());
+
+    return end - start;
+  }
   duration<double> BenchReduceByFactor(
       int factor,
       uint64_t begin_key,
       uint64_t end_key) {
+    assert(db);
     assert(end_key > begin_key);
     size_t n_blocks = (end_key - begin_key) / factor;
     WriteOptions wopts;
@@ -148,16 +160,6 @@ class RocksBench {
     return end - start;
   }
 
-  void DestoryDB() {
-    assert(db);
-    auto name = db->GetName();
-    auto opts = db->GetOptions();
-    db->Close();
-    auto s = rocksdb::DestroyDB(name, opts);
-    if (!s.ok()) {
-      throw std::runtime_error(s.ToString());
-    }
-  }
   std::string GetProperty(const std::string& key) {
     assert(db);
     std::string value;

@@ -82,7 +82,7 @@ PYBIND11_MODULE(rocksbench, m) {
       .def(FNAME(RocksBench, BenchCompact))
       .def(FNAME(RocksBench, BenchRead), "key"_a)
       .def(FNAME(RocksBench, BenchIterator))
-      .def(FNAME(RocksBench, DestoryDB))
+      .def(FNAME(RocksBench, BenchDeleteRange), "begin_key"_a, "end_key"_a)
       .def(FNAME(RocksBench, GetProperty), "key"_a)
       .def(FNAME(RocksBench, GetBlobProperties))
       .def(FNAME(RocksBench, SetBackgroundThreads), "num_threads"_a, "priority"_a)
