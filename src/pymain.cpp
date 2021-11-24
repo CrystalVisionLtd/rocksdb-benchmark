@@ -2,10 +2,10 @@
 // Created by wuyua on 11/22/2021.
 //
 
+#include <pybind11/chrono.h>
+#include <pybind11/functional.h>
 #include <pybind11/pybind11.h>
 #include <pybind11/stl.h>
-#include <pybind11/functional.h>
-#include <pybind11/chrono.h>
 
 #include "bench.hpp"
 #include "rocksbench.hpp"
@@ -76,7 +76,7 @@ PYBIND11_MODULE(rocksbench, m) {
   // clang-format off
   py::class_<RocksBench>(m, "RocksBench")
       .def(py::init<const std::string&, const Options&>(), "path"_a, "options"_a)
-      .def(FNAME(RocksBench, BenchWrite), "count"_a, "unit_size"_a, "first_key"_a = 0)
+      .def(FNAME(RocksBench, BenchWrite), "count"_a, "unit_size"_a, "first_key"_a = 0, "disable_wal"_a = false)
       .def(FNAME(RocksBench, BenchFlush))
       .def(FNAME(RocksBench, BenchReduceByFactor), "factor"_a, "begin_key"_a, "end_key"_a)
       .def(FNAME(RocksBench, BenchCompact))

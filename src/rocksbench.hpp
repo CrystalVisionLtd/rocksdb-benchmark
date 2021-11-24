@@ -34,6 +34,7 @@ class RocksBench {
     opts.IncreaseParallelism();
     opts.OptimizeLevelStyleCompaction();
     opts.create_if_missing = true;
+    opts.compression = rocksdb::kNoCompression;
     opts.statistics = CreateDBStatistics();
     opts.comparator = UInt64Comparator();
     //    opts.compaction_pri = kMinOverlappingRatio;
@@ -52,13 +53,14 @@ class RocksBench {
   duration<double> BenchWrite(
       int count,
       size_t unit_size,
-      uint64_t first_key = 0) {
+      uint64_t first_key = 0,
+      bool disable_wal = false) {
     assert(db);
     assert(unit_size > 0);
     assert(count > 0);
     std::string data(unit_size, 0x01);
     WriteOptions wopts;
-
+    wopts.disableWAL = disable_wal;
     Status s;
     auto start = high_resolution_clock::now();
     for (int i = 0; i < count; ++i) {
